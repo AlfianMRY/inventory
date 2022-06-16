@@ -29,11 +29,11 @@
     <table id="basic-datatable" class="table dt-responsive nowrap w-100 table-striped">
         <thead>
             <tr>
-                <th>No</th>
+                <th class="text-center">No</th>
                 <th>Nama</th>
                 <th>Kode</th>
                 <th>Kategori</th>
-                <th>Foto</th>
+                <th class="text-center">Stock</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
@@ -41,17 +41,17 @@
         <tbody>
             @foreach ($data as $d)
                 <tr>
-                    <th width="5%">{{ $no++ }}</th>
+                    <th width="5%" class="text-center">{{ $no++ }}</th>
                     <td width="10%">{{ $d->nama }}</td>
                     <td>{{ $d->kode }}</td>
                     <td>{{ $d->kategori }}</td>
-                    <td width="10%">{{ $d->foto }}</td>
+                    <td class="text-center">{{ $d->stock }}</td>
                     <td class="text-center">
                         <form action="{{ url('/barang',$d->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <div class="btn-group ">
-                                <a href="{{ url('/barang',$d->id) }}" class="btn btn-primary btn-sm"><i class="uil-eye"></i></a>
+                                <a href="{{ url('/barang',$d->id) }}" class="btn btn-info btn-sm"><i class="uil-eye"></i></a>
                                 <a href="{{ url('/barang/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="uil-edit"></i></a>
                                 <button type="submit"  onclick="return confirm('Yakin Hapus Data ini?')" class="btn btn-danger btn-sm"><i class=" uil-trash-alt"></i></button>
                             </div>
