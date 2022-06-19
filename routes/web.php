@@ -2,13 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SupplierController;
-use GuzzleHttp\Middleware;
-use PHPUnit\TextUI\XmlConfiguration\Group;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,15 +27,19 @@ Route::get('/login', function () {
     return view('auth.login');
 });
 
-Route::get('/admin', function () {
-    return view('layouts.master');
+Route::get('/denied', function () {
+    return view('denied');
 });
 
-Route::middleware('auth')->group(function(){
-    Route::resource('/kategori',KategoriController::class);
-    Route::resource('/barang',BarangController::class);
-    Route::resource('/supplier',SupplierController::class);
+Route::middleware('auth','cekstatus')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('home');
+    Route::resource('/profile',ProfileController::class);
+    Route::middleware('cekadmin')->group(function(){
+        Route::resource('/kategori',KategoriController::class);
+        Route::resource('/barang',BarangController::class);
+        Route::resource('/supplier',SupplierController::class);
+        Route::resource('/user',UserController::class);
+    });
 });
 
 

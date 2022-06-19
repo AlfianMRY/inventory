@@ -1,9 +1,9 @@
 <div class="leftside-menu leftside-menu-detached">
 
-    <div class="leftbar-user">
-        <a href="javascript: void(0);">
-            <img src="{{ asset('assets/images/users/avatar-1.jpg') }}" alt="user-image" height="42" class="rounded-circle shadow-sm">
-            <span class="leftbar-user-name">Dominic Keller</span>
+    <div class="leftbar-user ">
+        <a href="{{ url('/profile',Auth::user()->id) }}" >
+            <img src="{{ asset('/img/profile/'.Auth::user()->foto) }}" alt="user-image" height="42" class="rounded-circle shadow-sm">
+            <span class="leftbar-user-name mx-auto">{{ ucwords(Auth::user()->name) }}</span>
         </a>
     </div>
 
@@ -25,6 +25,8 @@
                 <span> Dashboards </span>
             </a>
         </li>
+        @if (Auth::user()->role == 'admin')
+            
         <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                 <i class="dripicons-folder-open"></i>
@@ -33,32 +35,40 @@
             </a>
             <div class="collapse" id="sidebarDashboards">
                 <ul class="side-nav-second-level">
-                    {{-- <li>
-                        <a href="{{ url('/kategori') }}">Kategori</a>
-                    </li> --}}
-                    {{-- <li>
-                        <a href="{{ url('/supplier') }}">Supplier</a>
-                    </li> --}}
                     <li class="side-nav-item">
-                        <a href="{{ url('/kategori') }}" class="side-nav-link ps-5">
+                        <a href="{{ url('/kategori') }}" class="side-nav-link ps-lg-5">
                             <i class=" uil-game-structure"></i>
                             <span>Kategori</span>
                         </a>
                     </li>
                     <li class="side-nav-item">
-                        <a href="{{ url('/supplier') }}" class="side-nav-link ps-5">
+                        <a href="{{ url('/supplier') }}" class="side-nav-link ps-lg-5">
                             <i class="uil-box"></i>
                             <span>Supplier</span>
                         </a>
                     </li>
                     <li class="side-nav-item">
-                        <a href="{{ url('/user') }}" class="side-nav-link ps-5">
+                        <a href="{{ url('/user') }}" class="side-nav-link ps-lg-5">
                             <i class="uil-users-alt"></i>
                             <span>User</span>
                         </a>
                     </li>
                 </ul>
             </div>
+        </li>
+            
+        <li class="side-nav-item">
+            <a href="{{ url('/barangmasuk') }}" class="side-nav-link">
+                <i class=" uil-truck"></i>
+                <span> Barang Masuk</span>
+            </a>
+        </li>
+        
+        <li class="side-nav-item">
+            <a href="{{ url('/reqbarang') }}" class="side-nav-link">
+                <i class="uil-shield-question"></i>
+                <span> Request Barang </span>
+            </a>
         </li>
 
         <li class="side-nav-item">
@@ -68,19 +78,7 @@
             </a>
         </li>
         
-        <li class="side-nav-item">
-            <a href="{{ url('/barangmasuk') }}" class="side-nav-link">
-                <i class=" uil-truck"></i>
-                <span> Barang Masuk</span>
-            </a>
-        </li>
-
-        <li class="side-nav-item">
-            <a href="{{ url('/reqbarang') }}" class="side-nav-link">
-                <i class="uil-shield-question"></i>
-                <span> Request Barang </span>
-            </a>
-        </li>
+        @endif
         
     </ul>
 
