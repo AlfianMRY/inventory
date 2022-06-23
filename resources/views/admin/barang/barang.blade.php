@@ -53,7 +53,7 @@
                             <div class="btn-group ">
                                 <a href="{{ url('/barang',$d->id) }}" class="btn btn-info btn-sm"><i class="uil-eye"></i></a>
                                 <a href="{{ url('/barang/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="uil-edit"></i></a>
-                                <button type="submit"  onclick="return confirm('Yakin Hapus Data ini?')" class="btn btn-danger btn-sm"><i class=" uil-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-danger btn-sm show_confirm"><i class=" uil-trash-alt"></i></button>
                             </div>
                         </form>
                     </td>

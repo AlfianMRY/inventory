@@ -17,6 +17,8 @@
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
         @yield('css')
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     </head>
 
     <body class="loading" style="background-color: rgb(184, 210, 255)" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -69,15 +71,38 @@
 
 
         <!-- Right Sidebar -->
-        @include('layouts.rightbar')
+        {{-- @include('layouts.rightbar') --}}
 
-        <div class="rightbar-overlay"></div>
+        {{-- <div class="rightbar-overlay"></div> --}}
         <!-- /End-bar -->
+        @include('sweetalert::alert')
 
 
         <!-- bundle -->
         <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
         @yield('js')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+        <script type="text/javascript">
+        
+            $('.show_confirm').click(function(event) {
+                var form =  $(this).closest("form");
+                var name = $(this).data("name");
+                event.preventDefault();
+                swal({
+                    title: `Are you sure you want to delete this record?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                    form.submit();
+                    }
+                });
+            });
+        
+        </script>
     </body>
 </html>

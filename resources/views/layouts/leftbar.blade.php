@@ -13,14 +13,14 @@
         <li class="side-nav-title side-nav-item">Navigation</li>
 
         <li class="side-nav-item">
-            <a href="/" class="side-nav-link">
+            <a href="{{ url('/') }}" class="side-nav-link">
                 <i class="uil-home-alt"></i>
                 <span> Landingpage </span>
             </a>
         </li>
 
         <li class="side-nav-item">
-            <a href="/dashboard" class="side-nav-link">
+            <a href="{{ ('/dashboard') }}" class="side-nav-link">
                 <i class=" uil-chart-bar"></i>
                 <span> Dashboards </span>
             </a>
@@ -35,20 +35,20 @@
             </a>
             <div class="collapse" id="sidebarDashboards">
                 <ul class="side-nav-second-level">
-                    <li class="side-nav-item">
-                        <a href="{{ url('/kategori') }}" class="side-nav-link ps-lg-5">
+                    <li class="side-nav-item ps-lg-3">
+                        <a href="{{ url('/kategori') }}" class="side-nav-link ">
                             <i class=" uil-game-structure"></i>
                             <span>Kategori</span>
                         </a>
                     </li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('/supplier') }}" class="side-nav-link ps-lg-5">
+                    <li class="side-nav-item ps-lg-3">
+                        <a href="{{ url('/supplier') }}" class="side-nav-link ">
                             <i class="uil-box"></i>
                             <span>Supplier</span>
                         </a>
                     </li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('/user') }}" class="side-nav-link ps-lg-5">
+                    <li class="side-nav-item ps-lg-3">
+                        <a href="{{ url('/user') }}" class="side-nav-link ">
                             <i class="uil-users-alt"></i>
                             <span>User</span>
                         </a>
@@ -56,21 +56,33 @@
                 </ul>
             </div>
         </li>
-            
-        <li class="side-nav-item">
-            <a href="{{ url('/barangmasuk') }}" class="side-nav-link">
-                <i class=" uil-truck"></i>
-                <span> Barang Masuk</span>
-            </a>
-        </li>
-        
-        <li class="side-nav-item">
-            <a href="{{ url('/reqbarang') }}" class="side-nav-link">
-                <i class="uil-shield-question"></i>
-                <span> Request Barang </span>
-            </a>
-        </li>
 
+        <li class="side-nav-item">
+            <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
+                <i class="uil-store"></i>
+                <span> Transaction </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarEcommerce">
+                <ul class="side-nav-second-level">
+                    <li class="side-nav-item ps-lg-3">
+                        <a href="{{ route('barang-masuk.index') }}" class="side-nav-link">
+                            <i class=" uil-truck"></i>
+                            <span> Barang Masuk</span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item ps-lg-3">
+                        <a href="{{ url('/req-barang') }}" class="side-nav-link">
+                            <i class="uil-shield-question"></i>
+                            <span> Request Barang </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </li>
+            
         <li class="side-nav-item">
             <a href="{{ url('/barang') }}" class="side-nav-link">
                 <i class="uil-dropbox"></i>
@@ -79,6 +91,13 @@
         </li>
         
         @endif
+        
+        <li class="side-nav-item">
+            <a href="{{ url('/list-barang') }}" class="side-nav-link">
+                <i class="uil-dropbox"></i>
+                <span> List Barang</span>
+            </a>
+        </li>
         
     </ul>
 

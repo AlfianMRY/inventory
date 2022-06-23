@@ -19,7 +19,7 @@ class CekStatus
     {
         $status = Auth::user()->status;
         if ($status != 'active') {
-            return redirect('/denied');
+            return response()->view('denied');
         }
         return $next($request);
     }

@@ -45,7 +45,7 @@
                             @csrf
                             @method('DELETE')
                             <a href="{{ url('/kategori/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="uil-file-edit-alt"></i> Edit</a>
-                            <button type="submit"  onclick="return confirm('Yakin Hapus Data ini?')" class="btn btn-danger btn-sm"><i class=" uil-file-minus-alt"></i> Delete</button>
+                            <button type="submit"  class="show_confirm btn btn-danger btn-sm"><i class=" uil-file-minus-alt"></i> Delete</button>
                         </form>
                     </td>
                 </tr>

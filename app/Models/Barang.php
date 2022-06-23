@@ -21,4 +21,14 @@ class Barang extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
     }
+
+    /**
+     * The roles that belong to the Barang
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function barangmasuk()
+    {
+        return $this->belongsToMany(BarangMasuk::class, 'barang_masuk', 'barang_id', 'supplier_id');
+    }
 }

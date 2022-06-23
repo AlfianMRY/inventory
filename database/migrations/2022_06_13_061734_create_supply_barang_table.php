@@ -18,6 +18,7 @@ class CreateSupplyBarangTable extends Migration
             $table->unsignedBigInteger('barang_id');
             $table->unsignedBigInteger('supplier_id');
             $table->date('tanggal_masuk');
+            $table->integer('quantity');
             $table->foreign('barang_id')->references('id')->on('barang')->onDelete('cascade');
             $table->foreign('supplier_id')->references('id')->on('supplier')->onDelete('cascade');
             $table->timestamps();

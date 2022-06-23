@@ -50,7 +50,7 @@ $no = 1;
                         @method('DELETE')
                         <div class="btn-group ">
                             <a href="{{ url('/supplier/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="uil-edit"></i> Edit</a>
-                            <button type="submit"  onclick="return confirm('Yakin Hapus Data ini?')" class="btn btn-danger btn-sm"><i class=" uil-trash-alt"></i> Delete</button>
+                            <button type="submit"  class="show_confirm btn btn-danger btn-sm"><i class=" uil-trash-alt"></i> Delete</button>
                         </div>
                     </form>
                 </td>

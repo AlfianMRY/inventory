@@ -19,7 +19,7 @@ class CekAdmin
     {
         $role = Auth::user()->role;
         if ($role != 'admin') {
-            return redirect('/denied');
+            return response()->view('denied');
         }
         return $next($request);
     }

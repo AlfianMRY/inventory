@@ -152,4 +152,9 @@ class BarangController extends Controller
         $barang->delete();
         return redirect('/barang')->with('success','Data Berhasil Dihapus!');
     }
+
+    public function listBarang(){
+        $barang = Barang::latest()->get();
+        return view('admin.list-barang',compact('barang'));
+    }
 }
