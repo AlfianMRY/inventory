@@ -1,8 +1,8 @@
 @extends('layouts.master')
 @section('css')
     <!-- Datatables css -->
-<link href="assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
-<link href="assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/vendor/responsive.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('header')
 <div class="d-flex justify-content-between w-100 ">
@@ -61,12 +61,12 @@ $no = 1;
 </table>
 @endsection
 @section('js')
-    <!-- Datatables js -->
-<script src="assets/js/vendor/jquery.dataTables.min.js"></script>
-<script src="assets/js/vendor/dataTables.bootstrap5.js"></script>
-<script src="assets/js/vendor/dataTables.responsive.min.js"></script>
-<script src="assets/js/vendor/responsive.bootstrap5.min.js"></script>
+<!-- Datatables js -->
+<script src="{{ asset('assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/responsive.bootstrap5.min.js') }}"></script>
 
 <!-- Datatable Init js -->
-<script src="assets/js/pages/demo.datatable-init.js"></script>
+<script src="{{ asset('assets/js/pages/demo.datatable-init.js') }}"></script>
 @endsection

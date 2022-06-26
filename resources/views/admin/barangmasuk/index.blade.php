@@ -1,10 +1,8 @@
 @extends('layouts.master')
 @section('css')
     <!-- Datatables css -->
-    <link href="assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css" />
-    <!-- Datatables css -->
-    <link href="assets/css/vendor/buttons.bootstrap5.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/css/vendor/responsive.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('header')
 <div class="d-flex justify-content-between w-100 ">
@@ -24,7 +22,12 @@
 @php
     $no = 1;
 @endphp
-<a href="{{ url('/pdf-barang-masuk') }}" class="btn btn-sm btn-success mb-2">PDF</a>
+<div class="d-flex">
+    <div class="btn-group">
+        <a href="{{ url('/pdf-barang-masuk') }}" class="btn btn-sm btn-danger mb-2">PDF</a>
+        <a href="{{ url('/excel-barang-masuk') }}" class="btn btn-sm btn-success mb-2">Excel</a>
+    </div>
+</div>
 <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
     <thead>
         <tr>
@@ -53,19 +56,13 @@
 </table>
 @endsection
 @section('js')
-    <!-- Datatables js -->
-    <script src="assets/js/vendor/jquery.dataTables.min.js"></script>
-    <script src="assets/js/vendor/dataTables.bootstrap5.js"></script>
-    <script src="assets/js/vendor/dataTables.responsive.min.js"></script>
-    <script src="assets/js/vendor/responsive.bootstrap5.min.js"></script>
-    
-    <!-- Datatable Init js -->
-    <script src="assets/js/pages/demo.datatable-init.js"></script>
-
 <!-- Datatables js -->
-<script src="assets/js/vendor/dataTables.buttons.min.js"></script>
-<script src="assets/js/vendor/buttons.bootstrap5.min.js"></script>
-<script src="assets/js/vendor/buttons.html5.min.js"></script>
-<script src="assets/js/vendor/buttons.flash.min.js"></script>
-<script src="assets/js/vendor/buttons.print.min.js"></script>
+<script src="{{ asset('assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/responsive.bootstrap5.min.js') }}"></script>
+
+<!-- Datatable Init js -->
+<script src="{{ asset('assets/js/pages/demo.datatable-init.js') }}"></script>
+
 @endsection

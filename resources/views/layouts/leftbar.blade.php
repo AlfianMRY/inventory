@@ -20,7 +20,7 @@
         </li>
 
         <li class="side-nav-item">
-            <a href="{{ ('/dashboard') }}" class="side-nav-link">
+            <a href="{{ url('/dashboard') }}" class="side-nav-link">
                 <i class=" uil-chart-bar"></i>
                 <span> Dashboards </span>
             </a>
@@ -53,6 +53,12 @@
                             <span>User</span>
                         </a>
                     </li>
+                    <li class="side-nav-item ps-lg-3">
+                        <a href="{{ url('/barang') }}" class="side-nav-link">
+                            <i class="uil-dropbox"></i>
+                            <span> Barang</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>
@@ -83,12 +89,6 @@
             </div>
         </li>
             
-        <li class="side-nav-item">
-            <a href="{{ url('/barang') }}" class="side-nav-link">
-                <i class="uil-dropbox"></i>
-                <span> Barang</span>
-            </a>
-        </li>
         
         @endif
         

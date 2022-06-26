@@ -37,7 +37,6 @@
                     <div class="ribbon-two ribbon-two-{{ $bg }}"><span>{{ $title }}</span></div>
                     <h5 class="card-title text-info">{{ $b->nama }}</h5>
                     <p class="card-text">Stock : {{ $b->stock }}</p>
-                    {{-- <a href="javascript: void(0);" class="btn btn-primary" disabled>Button</a> --}}
                     <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#standard-modal{{ $b->id }}" {{ $b->stock <= 0 ? 'disabled' : '' }}>Pesan</button>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
@@ -45,11 +44,12 @@
 
         <!-- Standard modal -->
         <div id="standard-modal{{ $b->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content">
-                    <form action="" method="post">
+                    <form action="{{ url('/tambah-req') }}" method="post">
+                        @csrf
                         <div class="modal-header">
-                            <h4 class="modal-title" id="standard-modalLabel">Request Barang : {{ $b->nama }}</h4>
+                            <h4 class="modal-title" id="standard-modalLabel">Pesan : {{ $b->nama }}</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
                         <div class="modal-body">
@@ -58,17 +58,17 @@
                             <input type="hidden" name="status" value="menunggu">
                             <div class="mb-3">
                                 <label for="simpleinput" class="form-label">Quantity</label>
-                                <input type="number" name="quantity" max="{{ $b->stock }}" id="simpleinput" class="form-control">
+                                <input type="number" name="quantity" max="{{ $b->stock }}" id="simpleinput" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label for="example-textarea" class="form-label">Keterangan</label>
-                                <textarea name="keterangan" class="form-control" id="example-textarea" rows="5">Keperluan Anda</textarea>
+                                <textarea name="keterangan" class="form-control" id="example-textarea" rows="5" placeholder="Keperluan Anda"></textarea>
                             </div>
                             <input type="hidden" name="tanggal_request" value="{{ date('Y-m-d') }}">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div><!-- /.modal-content -->

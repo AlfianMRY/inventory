@@ -6,10 +6,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\GetPDFController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GetExcelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\RequestBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,11 @@ Route::middleware('auth','cekstatus')->group(function(){
         Route::resource('/supplier',SupplierController::class);
         Route::resource('/user',UserController::class);
         Route::resource('/barang-masuk',BarangMasukController::class);
+
+        Route::resource('/req-barang',RequestBarangController::class);
+        Route::post('/tambah-req',[RequestBarangController::class,'store']);
+        Route::post('/tola-req',[RequestBarangController::class,'tolak']);
+        Route::post('/terima-req',[RequestBarangController::class,'terima']);
     });
     Route::get('/dashboard',[DashboardController::class,'index'])->name('home');
     Route::resource('/profile',ProfileController::class);
@@ -47,6 +54,7 @@ Route::middleware('auth','cekstatus')->group(function(){
 });
 
 Route::get('/pdf-barang-masuk',[GetPDFController::class,'barangMasuk']);
+Route::get('/excel-barang-masuk',[GetExcelController::class,'barangMasuk']);
 
 Auth::routes();
 

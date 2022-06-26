@@ -39,4 +39,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get all of the request fer
+     *
+     * @return \Illuminate\RequestBarang\Eloquent\Relations\HasMany
+     */
+    public function request()
+    {
+        return $this->hasMany(RequestBarang::class, 'user_id', 'id');
+    }
 }

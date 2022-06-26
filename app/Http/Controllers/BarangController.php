@@ -73,10 +73,6 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        // dd($barang->id);
-        // $barang = Barang::join('kategori', 'barang.kategori_id', '=', 'kategori.id')
-        // ->get(['barang.*', 'kategori.nama as kategori'])
-        // ->where('barang.id',$barang->id);
         return view('admin.barang.barang-detail',compact('barang'));
     }
 
@@ -123,8 +119,10 @@ class BarangController extends Controller
         }else{
             if ($barang->foto != 'default.jpg') {
                 $foto = $barang->foto;
+                
+            }else{
+                $foto = 'default.jpg';
             }
-            $foto = 'default.jpg';
         }
         $barang->update([
             'nama'=>$request->nama,
