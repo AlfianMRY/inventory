@@ -42,12 +42,11 @@ Route::middleware('auth','cekstatus')->group(function(){
         Route::resource('/supplier',SupplierController::class);
         Route::resource('/user',UserController::class);
         Route::resource('/barang-masuk',BarangMasukController::class);
-
         Route::resource('/req-barang',RequestBarangController::class);
-        Route::post('/tambah-req',[RequestBarangController::class,'store']);
         Route::post('/tola-req',[RequestBarangController::class,'tolak']);
         Route::post('/terima-req',[RequestBarangController::class,'terima']);
     });
+    Route::post('/tambah-req',[RequestBarangController::class,'store']);
     Route::get('/dashboard',[DashboardController::class,'index'])->name('home');
     Route::resource('/profile',ProfileController::class);
     Route::get('/list-barang', [BarangController::class,'listBarang']);

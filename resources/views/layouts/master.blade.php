@@ -52,9 +52,10 @@
                         </div>     
                         <!-- end page title --> 
                             @yield('content-top')
-                        <div class="bg-white p-3 mb-5">
+                        <div class="bg-white p-3 mb-3">
                             @yield('content')
                         </div>
+                            @yield('content-bottom')
 
                         <!-- Footer Start -->
                         @include('layouts.footer')

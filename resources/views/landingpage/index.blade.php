@@ -8,9 +8,8 @@
   <title>Gudangin</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+  <!-- Scripts -->
+   <script src="{{asset('js/app.js') }}" defer></script>
   <!-- Favicons -->
   <link href="{{asset('landingpage/img/logo_g.png')}}" rel="icon">
 
@@ -48,8 +47,8 @@
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center">
         <div class="col-xl-7 col-lg-9 text-center">
-          <h1>One Page Bootstrap Website Template</h1>
-          <h2>We are team of talented designers</h2>
+          <h1>Sistem Manajemen Gudang Terintegrasi</h1>
+          <h2>Optimalkan pemanfaatan ruangan, serta mudahkan pelacakan dan perhitungan kapasitas gudang secara otomatis dengan Software Manajemen Gudang terbaik.</h2>
         </div>
       </div>
       <div class="text-center">

@@ -41,40 +41,37 @@ class BarangMasukController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'barang' => 'required',
             'supplier' => 'required',
             'tgl_masuk' => 'required|date',
-            'quantity' => 'required'
+            'quantity' => 'required|min:1'
         ]);
+        $supplier = $request->supplier;
         $tgl = date('Y-m-d',strtotime($request->tgl_masuk));
-        
-        BarangMasuk::create([
-            'barang_id'=>$request->barang,
-            'supplier_id'=>$request->supplier,
-            'tanggal_masuk'=>$tgl,
-            'quantity'=>$request->quantity
-        ]);
+        $data = [];
+        $no = 0;
+        // dd($data,$request->all());
+        foreach ($request->barang as $i) {
+            $data[] = [
+                'barang_id' => $i,
+                'supplier_id' => $supplier,
+                'tanggal_masuk' => $tgl,
+                'quantity' => $request->quantity[$no],
+            ];
 
-        $barang = Barang::find($request->barang);
-        $stock = $barang->stock + $request->quantity;
-        $barang->update([
-            'stock' => $stock
-        ]);
+            $barang = Barang::find($i);
+            $stock = $barang->stock + $request->quantity[$no];
+            $barang->update(['stock' => $stock]);
+            $no++;
+        }
         
+        BarangMasuk::insert($data);
+
         return redirect()->route('barang-masuk.index')->with('success','Berhasil Menambah Data Barang');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\BarangMasuk  $barangMasuk
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BarangMasuk $barangMasuk)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
