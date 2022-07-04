@@ -43,13 +43,14 @@ Route::middleware('auth','cekstatus')->group(function(){
         Route::resource('/user',UserController::class);
         Route::resource('/barang-masuk',BarangMasukController::class);
         Route::resource('/req-barang',RequestBarangController::class);
-        Route::post('/tola-req',[RequestBarangController::class,'tolak']);
+        Route::post('/tolak-req',[RequestBarangController::class,'tolak']);
         Route::post('/terima-req',[RequestBarangController::class,'terima']);
     });
     Route::post('/tambah-req',[RequestBarangController::class,'store']);
     Route::get('/dashboard',[DashboardController::class,'index'])->name('home');
     Route::resource('/profile',ProfileController::class);
     Route::get('/list-barang', [BarangController::class,'listBarang']);
+    Route::post('/list-barang', [BarangController::class,'search']);
 });
 
 Route::get('/pdf-barang-masuk',[GetPDFController::class,'barangMasuk']);

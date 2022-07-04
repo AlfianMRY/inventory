@@ -78,12 +78,17 @@
                 $no = 1;
             @endphp
             @foreach ($user->request as $d)
+            @php
+                if ($d->status == 'menunggu') $stat = 'warning'; 
+                if ($d->status == 'ditolak') $stat = 'danger'; 
+                if ($d->status == 'disetujui') $stat = 'success'; 
+            @endphp
             <tr>
                 <td>{{ $no++ }}</td>
                 <td>{{ $d->barang->nama }}</td>
                 <td>{{ $d->quantity }}</td>
                 <td>{{ $d->tanggal_request }}</td>
-                <td><span class="badge bg-warning">{{ucwords($d->status)}}</span></td>
+                <td><span class="badge bg-{{ $stat }} ">{{ucwords($d->status)}}</span></td>
                 <td>{{ $d->keterangan }}</td>
             </tr>
             @endforeach

@@ -153,6 +153,21 @@ class BarangController extends Controller
 
     public function listBarang(){
         $barang = Barang::latest()->get();
-        return view('admin.list-barang',compact('barang'));
+        $search = '';
+        return view('admin.list-barang',compact('barang','search'));
+    }
+
+    /**
+     * Menerima request dan mencari list barang
+     * 
+     * @param \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $search1 = '%'.$request->search.'%';
+        $barang = Barang::where('nama','LIKE',$search1)->get();
+        $search = ': '.ucwords($request->search);
+        return view('admin.list-barang',compact('barang','search'));
     }
 }

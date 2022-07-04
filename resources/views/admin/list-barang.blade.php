@@ -1,18 +1,23 @@
 @extends('layouts.master')
 @section('header')
-<form action="" method="post">
 <div class="row justify-content-between align-content-center">
     <div class="col-md-3">
-        <h3 class="font-bold">Daftar Barang</h3>
+        <h3>Daftar Barang {{ $search ? $search : '' }}</h3>
+    </div>
+    <div class="col mt-1">
+        <h4 class="align-bottom text-end">Kategori<i class="mdi mdi-filter-outline"></i></h4>
     </div>
     <div class="col-md-4 ">
-        <div class="input-group mt-1">
-            <input type="text" id="simpleinput" class="form-control " name="search" placeholder="Search">
-            <button class="btn btn-info" type="submit">Search</button>
-        </div>
+        <form action="{{ url('/list-barang') }}" method="post">
+            @csrf
+            <div class="input-group mt-1">
+                @csrf
+                <input type="text" class="form-control" name="search" placeholder="Search">
+                <button class="btn btn-info" type="submit">Search <i class="uil uil-search-alt"></i></button>
+            </div>
+        </form>
     </div>
 </div>
-</form>
 @endsection
 @section('content')
     <div class="row ">

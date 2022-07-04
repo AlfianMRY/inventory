@@ -68,9 +68,8 @@
 @endif
 @endsection
 @section('content')
-    <h4>Riwayat Request Barang</h4>
-    <hr>
-    <table id="basic-datatable" class="basic-datatable table dt-responsive nowrap w-100 table-striped">
+    <h3>Riwayat Request Barang</h3>
+    <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
         <thead>
             <tr>
                 <th>No</th>
@@ -82,10 +81,11 @@
             </tr>
         </thead>
         <tbody>
-            
-            @foreach ($user->request as $d)
             @php
                 $no = 1;
+            @endphp
+            @foreach ($user->request as $d)
+            @php
                 if ($d->status == 'menunggu') $stat = 'warning'; 
                 if ($d->status == 'ditolak') $stat = 'danger'; 
                 if ($d->status == 'disetujui') $stat = 'success'; 
@@ -95,7 +95,7 @@
                 <td>{{ $d->barang->nama }}</td>
                 <td>{{ $d->quantity }}</td>
                 <td>{{ $d->tanggal_request }}</td>
-                <td><span class="badge bg-{{ $stat }}">{{ucwords($d->status)}}</span></td>
+                <td><span class="badge bg-{{ $stat }} ">{{ucwords($d->status)}}</span></td>
                 <td>{{ $d->keterangan }}</td>
             </tr>
             @endforeach
@@ -103,12 +103,12 @@
     </table>
 @endsection
 @section('js')
-    <!-- Datatables js -->
-    <script src="{{ asset('assets/js/vendor/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/js/vendor/responsive.bootstrap5.min.js') }}"></script>
-    
-    <!-- Datatable Init js -->
-    <script src="assets/js/pages/demo.datatable-init.js"></script>
+<!-- Datatables js -->
+<script src="{{ asset('assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/responsive.bootstrap5.min.js') }}"></script>
+
+<!-- Datatable Init js -->
+<script src="{{ asset('assets/js/pages/demo.datatable-init.js') }}"></script>
 @endsection
