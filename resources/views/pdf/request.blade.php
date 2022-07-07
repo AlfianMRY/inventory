@@ -28,7 +28,7 @@
 </head>
 <body>
 <center>
-    <h1>Data Barang Masuk</h1>
+    <h1>Data Request {{ ucwords($status) }}</h1>
     <h5>{{ $date }}</h5>
 </center>
     
@@ -36,10 +36,11 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Barang</th>
-            <th>Supplier</th>
-            <th>Tanggal Masuk</th>
-            <th>Jumlah Stock</th>
+            <th>Nama Barang</th>
+            <th>User</th>
+            <th>Quantity</th>
+            <th>Tanggal Request</th>
+            <th>Tanggal Status</th>
         </tr>
     </thead>
     <tbody>
@@ -50,9 +51,10 @@
             <tr>
                 <td>{{ $no++ }}</td>
                 <td>{{ $d->barang->nama }}</td>
-                <td>{{ $d->supplier->nama }}</td>
-                <td>{{ $d->tanggal_masuk }}</td>
+                <td>{{ $d->user->name }}</td>
                 <td>{{ $d->quantity }}</td>
+                <td>{{ $d->tanggal_request }}</td>
+                <td>{{ucwords($d->status)}}</td>
             </tr>
         @endforeach
     </tbody>

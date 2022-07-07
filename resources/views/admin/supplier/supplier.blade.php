@@ -27,6 +27,7 @@
 $no = 1;
 @endphp
 <table id="basic-datatable" class="table dt-responsive nowrap w-100 table-striped">
+    <a href="{{ url('pdf-supplier') }}" class="btn btn-danger mb-3">PDF</a>
     <thead>
         <tr>
             <th>No</th>

@@ -12,16 +12,26 @@
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          
           @guest
             <li><a class="getstarted scrollto" href="{{url('/login')}}">Login</a></li>  
           @else
-            <li><a href="" class="nav-link scrollto disabled">{{ Auth::user()->name }}</a></li>
-            <li>
-              <a class="nav-link scrollto" href="#" onclick="logout()">Logout</a> 
-            </li>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" >
-                @csrf
-              </form>
+          <li class="dropdown">
+            <a href="#">
+              <span><b>{{ Auth::user()->name }}</b></span>
+              <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul>
+                <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url('/profile',Auth::user()->id) }}">Profile</a></li>
+                <li>
+                  <a class="nav-link scrollto" href="#" onclick="logout()">Logout</a> 
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                  @csrf
+                </form>
+            </ul>
+          </li>
           @endauth
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

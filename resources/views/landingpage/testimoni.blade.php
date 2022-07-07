@@ -15,7 +15,7 @@
               Gudangin membantu kami menanggulangi masalah di manajemen inventaris, penjualan, dan pengadaan barang. Alur kerja yang jauh lebih efisien membuat kami bisa lebih fokus pada peningkatan kualitas produk.
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <img src="{{asset('landingpage/img/testimonials/testimonials-1.jpg')}}" class="testimonial-img" alt="">
+            <img src="{{asset('landingpage/img/testimonials/Ayu.jpeg')}}" class="testimonial-img" alt="">
             <h3>Ayu Widya Ningrum</h3>
             <h4>Ceo yudandan</h4>
           </div>
@@ -28,7 +28,7 @@
               Desain dan fitur-fiturnya sangat mudah digunakan.
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <img src="{{asset('landingpage/img/testimonials/testimonials-2.jpg')}}" class="testimonial-img" alt="">
+            <img src="{{asset('landingpage/img/testimonials/Jasmine.jpeg')}}" class="testimonial-img" alt="">
             <h3>Jasmine</h3>
             <h4>Designer</h4>
           </div>
@@ -41,7 +41,7 @@
                Semenjak memakai gudangin usaha saya menjadi semakin mudah di kontrol tampa harus membuat pembukuan yang rumit.
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <img src="{{asset('landingpage/img/testimonials/testimonials-3.jpg')}}" class="testimonial-img" alt="">
+            <img src="{{asset('landingpage/img/testimonials/Derren.jpeg')}}" class="testimonial-img" alt="">
             <h3>Derren</h3>
             <h4>Store Owner</h4>
           </div>
@@ -54,9 +54,9 @@
               Sistem-sistem yang ada pada gudangin sangat membatu saya dalam menjalankan bisnis saya yang baru saja berjalan.
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <img src="{{asset('landingpage/img/testimonials/testimonials-4.jpg')}}" class="testimonial-img" alt="">
-            <h3>Jidan</h3>
-            <h4>Store Owner dandanpedia</h4>
+            <img src="{{asset('landingpage/img/testimonials/Ali.jpeg')}}" class="testimonial-img" alt="">
+            <h3>Ali</h3>
+            <h4>Store Owner Keripik Asik</h4>
           </div>
         </div><!-- End testimonial item -->
 
@@ -67,7 +67,7 @@
               Suka suka suka
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <img src="{{asset('landingpage/img/testimonials/testimonials-5.jpg')}}" class="testimonial-img" alt="">
+            <img src="{{asset('landingpage/img/testimonials/Zarra.jpeg')}}" class="testimonial-img" alt="">
             <h3>Zarrah</h3>
             <h4>Entrepreneur</h4>
           </div>

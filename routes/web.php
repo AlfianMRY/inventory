@@ -53,7 +53,13 @@ Route::middleware('auth','cekstatus')->group(function(){
     Route::post('/list-barang', [BarangController::class,'search']);
 });
 
+// Export Route
 Route::get('/pdf-barang-masuk',[GetPDFController::class,'barangMasuk']);
+Route::get('/pdf-barang',[GetPDFController::class,'barang']);
+Route::get('/pdf-user',[GetPDFController::class,'user']);
+Route::get('/pdf-supplier',[GetPDFController::class,'supplier']);
+Route::get('/pdf-kategori',[GetPDFController::class,'kategori']);
+Route::get('/pdf-request-barang/{status}',[GetPDFController::class,'requestBarang']);
 Route::get('/excel-barang-masuk',[GetExcelController::class,'barangMasuk']);
 
 Auth::routes();

@@ -3,143 +3,143 @@
 
       <div class="section-title">
         <h2>Portfolio</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <p>Tampilan Web Admin</p>
       </div>
 
       <div class="row" data-aos="fade-up" data-aos-delay="150">
         <div class="col-lg-12 d-flex justify-content-center">
           <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-card">Card</li>
-            <li data-filter=".filter-web">Web</li>
+          <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-dashboards">Dashboards</li>
+            <li data-filter=".filter-master">Data Master</li>
+            <li data-filter=".filter-transction">Transction</li>
           </ul>
         </div>
       </div>
 
       <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-dashboards">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/Admin-Dashboard.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
+              <h4>DASHBOARDS</h4>
+              <p>Admin Dashboard</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/Admin-Dashboard.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-transction">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/Barang Masuk.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
+              <h4>BARANG</h4>
+              <p>Barang Masuk</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/Barang Masuk.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="transction 3"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-dashboards">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/dashboard.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>App 2</h4>
-              <p>App</p>
+              <h4>DASHBOARDS</h4>
+              <p>Main Dashboard</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/dashboard.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-master">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/Data Kategori.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>Card 2</h4>
-              <p>Card</p>
+              <h4>KATEGORI</h4>
+              <p>Data Kategori</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/Data Kategori.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="master 2"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-transction">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/List Barang.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>Web 2</h4>
-              <p>Web</p>
+              <h4>BARANG</h4>
+              <p>List Barang</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/List Barang.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="transction 2"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-master">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/Data Supplier.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>App 3</h4>
-              <p>App</p>
+              <h4>SUPPLIER</h4>
+              <p>Data Supplier</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/Data Supplier.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="master 1"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-master">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/Data User.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>Card 1</h4>
-              <p>Card</p>
+              <h4>USER</h4>
+              <p>Data User</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/Data User.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="master 3"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-transction">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/Request Barang.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>Card 3</h4>
-              <p>Card</p>
+              <h4>REQUEST</h4>
+              <p>Request Barang</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/Request Barang.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="transction 3"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-master">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+            <img src="{{asset('landingpage/img/portfolio/Data Barang.jpg')}}" class="img-fluid" alt="">
             <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
+              <h4>BARANG</h4>
+              <p>Data Barang</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <a href="{{asset('landingpage/img/portfolio/Data Barang.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="master 4"><i class="bx bx-plus"></i></a>
+                {{-- <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a> --}}
               </div>
             </div>
           </div>

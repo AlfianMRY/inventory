@@ -28,7 +28,7 @@
 </head>
 <body>
 <center>
-    <h1>Data Barang Masuk</h1>
+    <h1>Data Barang</h1>
     <h5>{{ $date }}</h5>
 </center>
     
@@ -36,10 +36,10 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Barang</th>
-            <th>Supplier</th>
-            <th>Tanggal Masuk</th>
-            <th>Jumlah Stock</th>
+            <th>Nama Barang</th>
+            <th>Kode</th>
+            <th>Kategori</th>
+            <th>Stock</th>
         </tr>
     </thead>
     <tbody>
@@ -49,10 +49,10 @@
         @foreach ($data as $d)
             <tr>
                 <td>{{ $no++ }}</td>
-                <td>{{ $d->barang->nama }}</td>
-                <td>{{ $d->supplier->nama }}</td>
-                <td>{{ $d->tanggal_masuk }}</td>
-                <td>{{ $d->quantity }}</td>
+                <td>{{ $d->nama }}</td>
+                <td>{{ $d->kode }}</td>
+                <td>{{ $d->kategori->nama }}</td>
+                <td>{{ $d->stock }}</td>
             </tr>
         @endforeach
     </tbody>

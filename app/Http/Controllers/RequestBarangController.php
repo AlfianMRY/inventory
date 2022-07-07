@@ -66,38 +66,4 @@ class RequestBarangController extends Controller
         }
         return redirect('/req-barang')->with('success','Request Barang Telah Disetujui');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RequestBarang  $requestBarang
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RequestBarang $requestBarang)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RequestBarang  $requestBarang
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, RequestBarang $requestBarang)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RequestBarang  $requestBarang
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(RequestBarang $requestBarang)
-    {
-        //
-    }
 }
