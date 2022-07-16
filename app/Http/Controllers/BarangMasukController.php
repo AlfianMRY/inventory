@@ -131,15 +131,4 @@ class BarangMasukController extends Controller
         ]);
         return redirect('/barang-masuk')->with('success','Data Berhasil diUpdate!');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BarangMasuk  $barangMasuk
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BarangMasuk $barangMasuk)
-    {
-        //
-    }
 }

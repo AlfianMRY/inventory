@@ -4,9 +4,9 @@
     <div class="col-md-3">
         <h3>Daftar Barang {{ $search ? $search : '' }}</h3>
     </div>
-    <div class="col mt-1">
+    {{-- <div class="col mt-1">
         <h4 class="align-bottom text-end">Kategori<i class="mdi mdi-filter-outline"></i></h4>
-    </div>
+    </div> --}}
     <div class="col-md-4 ">
         <form action="{{ url('/list-barang') }}" method="post">
             @csrf
@@ -26,7 +26,7 @@
             if($b->stock >= 100){
                 $bg = 'success';
                 $title = 'Ready';
-            }elseif ($b->stock >= 50 && $b->stock < 100) {
+            }elseif ($b->stock >= 1 && $b->stock < 100) {
                 $bg = 'warning';
                 $title = 'Hampir Habis';
             }else {
@@ -49,7 +49,7 @@
 
         <!-- Standard modal -->
         <div id="standard-modal{{ $b->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-dialog  modal-dialog-centered">
                 <div class="modal-content">
                     <form action="{{ url('/tambah-req') }}" method="post">
                         @csrf
@@ -57,6 +57,7 @@
                             <h4 class="modal-title" id="standard-modalLabel">Pesan : {{ $b->nama }}</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
+                        <img class="card-img-top" src="{{ asset('/img/barang/'.$b->foto) }}" alt="Card image cap">
                         <div class="modal-body">
                             <input type="hidden" name="barang_id" value="{{ $b->id }}">
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -67,7 +68,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="example-textarea" class="form-label">Keterangan</label>
-                                <textarea name="keterangan" class="form-control" id="example-textarea" rows="5" placeholder="Keperluan Anda"></textarea>
+                                <textarea name="keterangan" class="form-control" id="example-textarea" rows="3" placeholder="Keperluan Anda"></textarea>
                             </div>
                             <input type="hidden" name="tanggal_request" value="{{ date('Y-m-d') }}">
                         </div>
