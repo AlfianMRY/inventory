@@ -52,10 +52,14 @@
                     <td>{{ $d->email }}</td>
                     <td><i class="mdi mdi-circle text-{{ $d->status == 'active' ? $active : $deactive}}"></i>{{ $d->status }}</td>
                     <td class="text-center">
-                        <div class="btn-group ">
-                            <a href="{{ url('/user',$d->id) }}" class="btn btn-info btn-sm"><i class="uil-eye"></i></a>
-                            <a href="{{ url('/user/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="uil-edit"></i></a>
-                        </div>
+                        <form action="{{ url('/user',$d->id) }}" method="post">
+                            @csrf @method('DELETE')
+                            <div class="btn-group ">
+                                <a href="{{ url('/user',$d->id) }}" class="btn btn-info btn-sm"><i class="uil-eye"></i></a>
+                                <a href="{{ url('/user/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="uil-edit"></i></a>
+                                <button class="btn btn-danger show_confirm" type="submit"><i class="uil-trash"></i></button>
+                            </div>
+                        </form>
                     </td>
                 </tr>
             @endforeach

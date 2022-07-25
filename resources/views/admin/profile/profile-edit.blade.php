@@ -35,8 +35,8 @@
                                     <p class="mb-0 font-13 text-white-50">Status Akun</p>
                                 </li>
                                 <li class="list-inline-item">
-                                    <h5 class="mb-1">5482</h5>
-                                    <p class="mb-0 font-13 text-white-50">Number of Orders</p>
+                                    <h5 class="mb-1">{{ $user->request()->count() }}x</h5>
+                                    <p class="mb-0 font-13 text-white-50">Melakukan Pemesanan</p>
                                 </li>
                             </ul>
                         </div>
@@ -75,9 +75,17 @@
     <form action="{{ url('/profile',$user->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <h4>Ganti Password :</h4>
-        <hr>
         <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="example-fileinput" class="form-label">Nama :</label>
+                <input type="text" name="name" value="{{ $user->name }}" id="example-fileinput" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="example-fileinput" class="form-label">Email :</label>
+                <input type="email" name="email" value="{{ $user->email }}" id="example-fileinput" class="form-control">
+            </div>
+            <h4>Ganti Password :</h4>
+            <hr>
             <div class="col-md-6 mb-3">
                 <label for="password" class="form-label">Password Baru :</label>
                 <div class="input-group input-group-merge">

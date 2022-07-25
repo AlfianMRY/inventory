@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Storage;
 
 class BarangController extends Controller
 {
+    public function landingPage()
+    {
+        $barang = Barang::orderBy('updated_at','asc')->limit(4)->get();
+        return view('landingpage.index',compact('barang'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +21,6 @@ class BarangController extends Controller
      */
     public function index()
     {
-        
         $data = Barang::join('kategori', 'barang.kategori_id', '=', 'kategori.id')
         ->get(['barang.*', 'kategori.nama as kategori']);
         return view('admin.barang.barang',compact('data'));
@@ -152,9 +155,10 @@ class BarangController extends Controller
     }
 
     public function listBarang(){
-        $barang = Barang::latest()->get();
+        $kategori = Kategori::all();
+        $barang = Barang::orderBy('updated_at','asc')->get();
         $search = '';
-        return view('admin.list-barang',compact('barang','search'));
+        return view('admin.list-barang',compact('barang','search','kategori'));
     }
 
     /**
@@ -169,5 +173,18 @@ class BarangController extends Controller
         $barang = Barang::where('nama','LIKE',$search1)->get();
         $search = ': '.ucwords($request->search);
         return view('admin.list-barang',compact('barang','search'));
+    }
+
+    public function kategori($keys)
+    {
+        if ($keys == 'semua') {
+            $barang = Barang::orderBy('updated_at','asc')->get();
+        }else {
+            $key = Kategori::select('id')->where('nama',$keys)->first();
+            $barang = Barang::orderBy('updated_at','asc')->where('kategori_id',$key->id)->get();
+        }
+        $kategori = Kategori::all();
+        $search = '';
+        return view('admin.list-barang',compact('barang','search','kategori'));
     }
 }

@@ -54,7 +54,6 @@ class ProfileController extends Controller
             }
         }elseif (!empty($request->password1) or !empty($request->password2)) {
             return redirect()->back()->with('error','Kedua Password Harus di Isi Atau Kosong Keduanya!');
-           
         }
 
         if (!empty($request->foto)) {
@@ -70,6 +69,13 @@ class ProfileController extends Controller
             $request->foto->move(public_path('img/profile'), $foto);
             $user->update(['foto'=>$foto]);
         }
+        if ($user->email != $request->email) {
+            $request->validate([
+                'email'=>'unique:users'
+            ]);
+            $user->update(['email'=>$request->email]);
+        }
+        $user->update(['name'=>$request->name]);
         return redirect()->route('profile.show',$user->id)->with('success','Profile Berhasil Di Update')->with(compact('user'));
     }
 

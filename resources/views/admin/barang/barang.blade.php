@@ -28,6 +28,7 @@
 @endphp
     <table id="basic-datatable" class="table dt-responsive nowrap w-100 table-striped">
         <a href="{{ url('pdf-barang') }}" class="btn btn-danger mb-3">PDF</a>
+        <a href="{{ url('excel-barang') }}" class="btn btn-success mb-3">Excel</a>
         <thead>
             <tr>
                 <th class="text-center">No</th>
@@ -52,13 +53,36 @@
                             @csrf
                             @method('DELETE')
                             <div class="btn-group ">
-                                <a href="{{ url('/barang',$d->id) }}" class="btn btn-info btn-sm"><i class="uil-eye"></i></a>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#detail-barang-{{ $d->id }}"><i class="uil-eye"></i></button>
                                 <a href="{{ url('/barang/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"><i class="uil-edit"></i></a>
                                 <button type="submit" class="btn btn-danger btn-sm show_confirm"><i class=" uil-trash-alt"></i></button>
                             </div>
                         </form>
                     </td>
                 </tr>
+
+                {{-- Modal Detail Barang --}}
+                <!-- Large modal -->
+                <div class="modal fade" id="detail-barang-{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myLargeModalLabel"><strong>{{ $d->nama }}</strong></h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body row">
+                                <div class="col-md-6 overflow-hidden align-items-center">
+                                    <img class="w-100" src="{{ asset('img/barang/'.$d->foto) }}" alt="Card image cap">
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>Kode Barang : <strong>{{ $d->kode }}</strong></h3>
+                                    <h3>kategori Barang : <strong>{{ $d->kategori }}</strong></h3>
+                                    <h3>Stok Barang : <strong>{{ $d->stock }}</strong></h3>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             @endforeach
             
         </tbody>

@@ -24,9 +24,7 @@ use App\Http\Controllers\RequestBarangController;
 |
 */
 
-Route::get('/', function () {
-    return view('landingpage.index');
-});
+Route::get('/', [BarangController::class,'landingPage']);
 Route::get('/login', function () {
     return view('auth.login');
 });
@@ -51,6 +49,7 @@ Route::middleware('auth','cekstatus')->group(function(){
     Route::resource('/profile',ProfileController::class);
     Route::get('/list-barang', [BarangController::class,'listBarang']);
     Route::post('/list-barang', [BarangController::class,'search']);
+    Route::get('/list-barang/{key}', [BarangController::class,'kategori']);
 });
 
 // Export Route
@@ -61,6 +60,8 @@ Route::get('/pdf-supplier',[GetPDFController::class,'supplier']);
 Route::get('/pdf-kategori',[GetPDFController::class,'kategori']);
 Route::get('/pdf-request-barang/{status}',[GetPDFController::class,'requestBarang']);
 Route::get('/excel-barang-masuk',[GetExcelController::class,'barangMasuk']);
+Route::get('/excel-barang',[GetExcelController::class,'barang']);
+Route::get('/excel-request-barang/{key}',[GetExcelController::class,'requestBarang']);
 
 Auth::routes();
 

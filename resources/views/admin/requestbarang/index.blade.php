@@ -61,7 +61,7 @@
     <div class="tab-pane show active" id="menunggu">
         <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
             <a href="{{ url('/pdf-request-barang',$menunggu) }}" class="btn btn-sm btn-danger mb-2">PDF</a>
-            <a href="{{ url('/excel-request-barang') }}" class="btn btn-sm btn-success mb-2">Excel</a>
+            <a href="{{ url('/excel-request-barang/menunggu') }}" class="btn btn-sm btn-success mb-2">Excel</a>
             <thead>
                 <tr>
                     <th>Barang</th>
@@ -123,7 +123,7 @@
     <div class="tab-pane " id="disetujui">
         <table id="basic-datatable" class="basic-datatable table table-striped dt-responsive nowrap w-100">
             <a href="{{ url('/pdf-request-barang',$disetujui) }}" class="btn btn-sm btn-danger mb-2">PDF</a>
-            <a href="{{ url('/excel-request-barang') }}" class="btn btn-sm btn-success mb-2">Excel</a>
+            <a href="{{ url('/excel-request-barang/disetujui') }}" class="btn btn-sm btn-success mb-2">Excel</a>
             <thead>
                 <tr>
                     <th>Barang</th>
@@ -149,7 +149,7 @@
     <div class="tab-pane" id="ditolak">
         <table id="basic-datatable" class="basic-datatable table table-striped dt-responsive nowrap w-100">
             <a href="{{ url('/pdf-request-barang',$ditolak) }}" class="btn btn-sm btn-danger mb-2">PDF</a>
-            <a href="{{ url('/excel-request-barang') }}" class="btn btn-sm btn-success mb-2">Excel</a>
+            <a href="{{ url('/excel-request-barang/ditolak') }}" class="btn btn-sm btn-success mb-2">Excel</a>
             <thead>
                 <tr>
                     <th>Barang</th>
