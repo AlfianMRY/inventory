@@ -32,10 +32,11 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Barang</th>
-            <th>Supplier</th>
+            <th>Kode Suply</th>
             <th>Tanggal Masuk</th>
-            <th>Jumlah Stock</th>
+            <th>Supplier</th>
+            <th>Barang</th>
+            <th>Quantity</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -43,10 +44,27 @@
         @foreach ($data as $d)
         <tr>
             <td>{{ $no++ }}</td>
-            <td>{{ $d->barang->nama }}</td>
-            <td>{{ $d->supplier->nama }}</td>
+            <td>{{ $d->kode_suply }}</td>
             <td>{{ $d->tanggal_masuk }}</td>
-            <td>{{ $d->quantity }}</td>
+            <td>{{ $d->supplier->nama }}</td>
+            <td>
+                @foreach ($d->barangMasuk as $i)
+                    <ul>
+                        <li>
+                            {{ $i->barang->nama }}
+                        </li>
+                    </ul>
+                @endforeach
+            </td>
+            </td>
+            <td>
+                @foreach ($d->barangMasuk as $i)
+                    <ul>
+                        <li>
+                            {{ $i->stock }} 
+                        </li>
+                    </ul>
+                @endforeach
             <th>
                 <a href="{{ url('/barang-masuk/'.$d->id.'/edit') }}" class="btn btn-warning btn-sm"> Edit</a>
             </th>

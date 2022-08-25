@@ -25,18 +25,15 @@ class DashboardController extends Controller
         $from = $now->subYear(1)->format('Y-m-d');
         foreach ($period as $date)
         {
-            $barangMasuk = BarangMasuk::whereMonth('tanggal_masuk','=',$date->month)
-                ->whereBetween('tanggal_masuk',[$from,$to])
-                ->get('quantity')->sum('quantity');
+            $barangMasuk = BarangMasuk::whereMonth('created_at','=',$date->month)
+                ->get('stock')->sum('stock');
             $barangKeluar = RequestBarang::whereMonth('tanggal_request','=',$date->month)
-                ->whereBetween('tanggal_request',[$from,$to])
                 ->where('status','=','disetujui')->get('quantity')->sum('quantity');
             $data[] = $date->monthName;
             $bm[] = $barangMasuk;
             $rbs[] = $barangKeluar;
             $sisa[] = $barangMasuk - $barangKeluar;
             $rbt[] = RequestBarang::whereMonth('tanggal_request','=',$date->month)
-                ->whereBetween('tanggal_request',[$from,$to])
                 ->where('status','=','ditolak')->get('quantity')->sum('quantity');
         }
         return compact('bm','data','rbs','rbt','sisa');

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\BarangMasuk;
 use App\Models\Supplier;
+use App\Models\Suply;
 use App\Models\Barang;
+use App\Models\SuplyBarang;
 use Illuminate\Http\Request;
 
 class BarangMasukController extends Controller
@@ -16,7 +18,7 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        $data = BarangMasuk::latest()->get();
+        $data = suply::latest()->get();
         return view('admin.barangmasuk.index',compact('data'));
     }
 
@@ -29,8 +31,8 @@ class BarangMasukController extends Controller
     {
         $barang = Barang::all('id','nama');
         $supplier = Supplier::all('id','nama');
-        // dd($barang,$supplier);
-        return view('admin.barangmasuk.input',compact('barang','supplier'));
+        $suply = Suply::all();
+        return view('admin.barangmasuk.input',compact('barang','supplier','suply'));
     }
 
     /**
@@ -43,31 +45,41 @@ class BarangMasukController extends Controller
     {
         
         $request->validate([
-            'barang' => 'required',
             'supplier' => 'required',
             'tgl_masuk' => 'required|date',
+            'barang' => 'required',
             'quantity' => 'required|min:1'
         ]);
-        $supplier = $request->supplier;
         $tgl = date('Y-m-d',strtotime($request->tgl_masuk));
+        $sup = Suply::where('tanggal_masuk',$tgl);
+        $kode = 'SPY-'. date('Ymd',$tgl).'-'.$sup->count()+1;
         $data = [];
         $no = 0;
-        // dd($data,$request->all());
-        foreach ($request->barang as $i) {
-            $data[] = [
-                'barang_id' => $i,
-                'supplier_id' => $supplier,
-                'tanggal_masuk' => $tgl,
-                'quantity' => $request->quantity[$no],
-            ];
 
-            $barang = Barang::find($i);
-            $stock = $barang->stock + $request->quantity[$no];
-            $barang->update(['stock' => $stock]);
+        $idSuply = Suply::insertGetId([
+            'kode_suply'=> $kode,
+            'tanggal_masuk'=> $tgl,
+            'supplier_id'=>$request->supplier
+        ]);
+
+        foreach ($request->barang as $b) {
+            $data[] = BarangMasuk::insertGetId([
+                'stock'=>$request->quantity[$no],
+                'barang_id'=>$b
+            ]);
+
+            $barang = Barang::find($b);
+            $barang->update([
+                'stock' => $request->quantity[$no]+$barang->stock
+            ]);
             $no++;
         }
-        
-        BarangMasuk::insert($data);
+        foreach ($data as $d) {
+            SuplyBarang::create([
+                'barang_masuk_id'=>$d,
+                'suply_id'=>$idSuply
+            ]);
+        }
 
         return redirect()->route('barang-masuk.index')->with('success','Berhasil Menambah Data Barang');
     }
@@ -79,14 +91,13 @@ class BarangMasukController extends Controller
      * @param  \App\Models\BarangMasuk  $barangMasuk
      * @return \Illuminate\Http\Response
      */
-    public function edit(BarangMasuk $barangMasuk)
+    public function edit($id)
     {
-        
         $barang = Barang::all('id','nama');
         $supplier = Supplier::all('id','nama');
-        $data = $barangMasuk;
-        // dd($data);
-        return view('admin.barangmasuk.edit',compact('data','barang','supplier'));
+        $data = BarangMasuk::all();
+        $suply = Suply::find($id);
+        return view('admin.barangmasuk.edit',compact('data','barang','supplier','suply'));
     }
 
     /**
@@ -96,38 +107,55 @@ class BarangMasukController extends Controller
      * @param  \App\Models\BarangMasuk  $barangMasuk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BarangMasuk $barangMasuk)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'barang' => 'required',
             'supplier' => 'required',
             'tgl_masuk' => 'required|date',
-            'quantity' => 'required'
+            'barang' => 'required',
+            'quantity' => 'required|min:1'
         ]);
-        if ($request->barang != $barangMasuk->barang_id) {
-            $old = Barang::find($barangMasuk->barang_id);
-            $stockold = $old->stock - $barangMasuk->quantity;
-            $old->update(['stock'=>$stockold]);
-            $new = Barang::find($request->barang);
-            $stocknew = $new->stock + $request->quantity; 
-            $new->update(['stock'=>$stocknew]);
-        }else {
-            $old = Barang::find($barangMasuk->barang_id);
-            if ($request->quantity < $barangMasuk->quantity) {
-                $quantity = $barangMasuk->quantity - $request->quantity;
-                $newstock = $old->stock - $quantity;
-            }else {
-                $quantity = $request->quantity - $barangMasuk->quantity;
-                $newstock = $old->stock + $quantity;
-            }
-            $old->update(['stock' => $newstock]);
-        }
         $tgl = date('Y-m-d',strtotime($request->tgl_masuk));
-        $barangMasuk->update([
-            'barang_id'=>$request->barang,
-            'supplier_id'=>$request->supplier,
-            'tanggal_masuk'=>$tgl,
-            'quantity'=>$request->quantity
+        $suply = Suply::find($id);
+        $no = 0;
+        
+        // dd($suply->barangMasuk);
+        foreach ($suply->barangMasuk as $i) {
+            $barang = Barang::find($request->barang[$no]);
+            if ($request->barang[$no] == $i->barang_id) {
+                if ($request->quantity[$no] > $i->stock ) {
+                    $selisih = $request->quantity[$no] - $i->stock;
+                    $totalStock = $barang->stock + $selisih;
+                }elseif ($request->quantity[$no] < $i->stock) {
+                    $selisih = $i->stock - $request->quantity[$no];
+                    $totalStock = $barang->stock - $selisih;
+                }else {
+                    $totalStock = $i->stock;
+                }
+                $barang->update(['stock' => $totalStock]);
+                $i->update(['stock'=>$request->quantity[$no]]);
+            }else {
+                try {
+                    $totalStock = $i->barang->stock - $i->stock;
+                    $i->barang->update(['stock'=>$totalStock]);
+                } catch (\Throwable $th) {
+                    return redirect()->back()->with('error',$th->getMessage());
+                }
+                $totalStock = $barang->stock + $request->quantity[$no];
+                $barang->update(['stock'=>$totalStock]);
+                $i->update([
+                    'barang_id'=>$request->barang[$no],
+                    'stock'=>$request->quantity[$no]
+                ]);
+            }
+            $no += 1;
+        }
+        $sup = Suply::where('tanggal_masuk',$tgl);
+        $kode = 'SPY-'. date('Ymd',$tgl).'-'.$sup->count()+1;
+        Suply::find($id)->update([
+            'tanggal_masuk'=>$request->tgl_masuk,
+            'supplier_id' =>$request->supplier,
+            'kode_suply'=>$kode
         ]);
         return redirect('/barang-masuk')->with('success','Data Berhasil diUpdate!');
     }

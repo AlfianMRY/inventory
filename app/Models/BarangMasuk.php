@@ -17,12 +17,18 @@ class BarangMasuk extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function supplier()
-    {
-        return $this->hasOne(Supplier::class, 'id', 'supplier_id');
-    }
     public function barang()
     {
-        return $this->hasOne(Barang::class, 'id' , 'barang_id');
+        return $this->hasOne(Barang::class, 'id', 'barang_id');
+    }
+    
+    /**
+     * The roles that belong to the BarangMasuk
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function suply()
+    {
+        return $this->belongsToMany(Suply::class, SuplyBarang::class);
     }
 }

@@ -45,12 +45,6 @@
 @endif
 @endsection
 @section('content')
-{{-- <div class="d-flex">
-    <div class="btn-group">
-        <a href="{{ url('/pdf-req-barang') }}" class="btn btn-sm btn-danger mb-2">PDF</a>
-        <a href="{{ url('/excel-req-barang') }}" class="btn btn-sm btn-success mb-2">Excel</a>
-    </div>
-</div> --}}
 @php
     $menunggu = 'menunggu';
     $disetujui = 'disetujui';
@@ -59,13 +53,18 @@
 
 <div class="tab-content">
     <div class="tab-pane show active" id="menunggu">
-        <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100">
+        <table id="basic-datatable" class="table table-striped dt-responsive nowrap w-100 table-bordered">
             <a href="{{ url('/pdf-request-barang',$menunggu) }}" class="btn btn-sm btn-danger mb-2">PDF</a>
             <a href="{{ url('/excel-request-barang/menunggu') }}" class="btn btn-sm btn-success mb-2">Excel</a>
-            <thead>
+            <thead class="text-center table-info table-bordered">
                 <tr>
-                    <th>Barang</th>
-                    <th>User</th>
+                    <th rowspan="2" class="align-middle">User</th>
+                    <th colspan="2">Barang</th>
+                    <th colspan="3">Keterangan</th>
+                </tr>
+                <tr>
+                    {{-- <th>User</th> --}}
+                    <th>Nama Barang</th>
                     <th>Quantity</th>
                     <th>Tanggal Request</th>
                     <th>Status</th>
@@ -75,12 +74,14 @@
             <tbody>
                 @foreach ($data->where('status','menunggu') as $d)
                 <tr>
+                    <td class="table-user">
+                        <img src="{{ asset('/img/profile/'.$d->user->foto) }}" alt="table-user" class="me-2 rounded-circle" /> {{ $d->user->name }}
+                    </td>
                     <td>{{ $d->barang->nama }}</td>
-                    <td>{{ $d->user->name }}</td>
                     <td>{{ $d->quantity }}</td>
                     <td>{{ $d->tanggal_request }}</td>
                     <td><span class="badge bg-warning">{{ucwords($d->status)}}</span></td>
-                    <th class="text-center">
+                    <th class="text-center table-action">
                         <form action="{{ url('/terima-req') }}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $d->id }}">
@@ -124,10 +125,14 @@
         <table id="basic-datatable" class="basic-datatable table table-striped dt-responsive nowrap w-100">
             <a href="{{ url('/pdf-request-barang',$disetujui) }}" class="btn btn-sm btn-danger mb-2">PDF</a>
             <a href="{{ url('/excel-request-barang/disetujui') }}" class="btn btn-sm btn-success mb-2">Excel</a>
-            <thead>
+            <thead class="text-center table-bordered table-info">
+                <tr>
+                    <th rowspan="2" class="align-middle">User</th>
+                    <th colspan="2">Barang</th>
+                    <th colspan="2">Keterangan</th>
+                </tr>
                 <tr>
                     <th>Barang</th>
-                    <th>User</th>
                     <th>Quantity</th>
                     <th>Tanggal Request</th>
                     <th>Status</th>
@@ -136,8 +141,8 @@
             <tbody>
                 @foreach ($data->where('status','disetujui') as $d)
                 <tr>
+                    <td class="table-user"><img src="{{ asset('/img/profile/'.$d->user->foto) }}" alt="table-user" class="me-2 rounded-circle" />{{ $d->user->name }}</td>
                     <td>{{ $d->barang->nama }}</td>
-                    <td>{{ $d->user->name }}</td>
                     <td>{{ $d->quantity }}</td>
                     <td>{{ $d->tanggal_request }}</td>
                     <td><span class="badge bg-success">{{ucwords($d->status)}}</span></td>
@@ -150,10 +155,14 @@
         <table id="basic-datatable" class="basic-datatable table table-striped dt-responsive nowrap w-100">
             <a href="{{ url('/pdf-request-barang',$ditolak) }}" class="btn btn-sm btn-danger mb-2">PDF</a>
             <a href="{{ url('/excel-request-barang/ditolak') }}" class="btn btn-sm btn-success mb-2">Excel</a>
-            <thead>
+            <thead class="text-center table-bordered table-info">
+                <tr>
+                    <th rowspan="2" class="align-middle">User</th>
+                    <th colspan="2">Barang</th>
+                    <th colspan="2">Keterangan</th>
+                </tr>
                 <tr>
                     <th>Barang</th>
-                    <th>User</th>
                     <th>Quantity</th>
                     <th>Tanggal Request</th>
                     <th>Status</th>
@@ -162,8 +171,8 @@
             <tbody>
                 @foreach ($data->where('status','ditolak') as $d)
                 <tr>
+                    <td class="table-user"><img src="{{ asset('/img/profile/'.$d->user->foto) }}" alt="table-user" class="me-2 rounded-circle" />{{ $d->user->name }}</td>
                     <td>{{ $d->barang->nama }}</td>
-                    <td>{{ $d->user->name }}</td>
                     <td>{{ $d->quantity }}</td>
                     <td>{{ $d->tanggal_request }}</td>
                     <td><span class="badge bg-danger">{{ucwords($d->status)}}</span></td>

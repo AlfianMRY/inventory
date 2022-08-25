@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\ServiceProvider;
+use App\Models\RequestBarang;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $reqMenunggu = RequestBarang::where('status','menunggu')->latest()->get();
+        return view()->share('reqMenunggu', $reqMenunggu);
     }
 }

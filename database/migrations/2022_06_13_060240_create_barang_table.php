@@ -18,7 +18,7 @@ class CreateBarangTable extends Migration
             $table->string('nama',45);
             $table->string('kode',10);
             $table->unsignedBigInteger('kategori_id');
-            $table->integer('stock')->unsigned()->nullable()->default(0);
+            $table->bigInteger('stock')->nullable()->default(0);
             $table->string('foto');
             $table->timestamps();
             $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');

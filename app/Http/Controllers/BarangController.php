@@ -172,7 +172,8 @@ class BarangController extends Controller
         $search1 = '%'.$request->search.'%';
         $barang = Barang::where('nama','LIKE',$search1)->get();
         $search = ': '.ucwords($request->search);
-        return view('admin.list-barang',compact('barang','search'));
+        $kategori = Kategori::all();
+        return view('admin.list-barang',compact('barang','search','kategori'));
     }
 
     public function kategori($keys)

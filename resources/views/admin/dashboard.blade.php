@@ -106,6 +106,7 @@
                 borderColor: 'rgb(0, 255, 30)',
                 borderWidht: '10',
                 data: {{ json_encode($bm['rbs']) }}
+                
             },
             // {
             //     label: "Sisa Barang",
@@ -170,7 +171,7 @@
         datasets: [
             {
                 data: [
-                    {{ $readyStock }},
+                    {{$readyStock }},
                     {{ $emptyStock }},
                     {{ $readyStock + $emptyStock }}
                 ],

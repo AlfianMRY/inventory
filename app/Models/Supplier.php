@@ -11,13 +11,13 @@ class Supplier extends Model
     protected $table = 'supplier';
     protected $guarded = ['id'];
 
-    /**
-     * The roles that belong to the Supplier
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function barangmasuk()
-    {
-        return $this->belongsToMany(BarangMasuk::class, 'barang_masuk', 'barang_id', 'supplier_id');
-    }
+   /**
+    * Get all of the comments for the Supplier
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+   public function suply()
+   {
+       return $this->hasMany(Suply::class, 'supplier_id', 'id');
+   }
 }

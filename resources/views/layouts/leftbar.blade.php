@@ -67,6 +67,9 @@
             <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
                 <i class="uil-store"></i>
                 <span> Transaction </span>
+                @if (isset($reqMenunggu) && $reqMenunggu->count() >= 1)
+                    <span class="badge bg-warning"> + {{ $reqMenunggu->count() }}</span>
+                @endif
                 <span class="menu-arrow"></span>
             </a>
             <div class="collapse" id="sidebarEcommerce">
@@ -82,6 +85,9 @@
                         <a href="{{ url('/req-barang') }}" class="side-nav-link">
                             <i class="uil-shield-question"></i>
                             <span> Request Barang </span>
+                            @if (isset($reqMenunggu) && $reqMenunggu->count() >= 1)
+                                <span class="badge bg-warning"> + {{ $reqMenunggu->count() }}</span>
+                            @endif
                         </a>
                     </li>
 

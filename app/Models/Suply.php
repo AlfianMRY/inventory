@@ -5,30 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Barang extends Model
+class Suply extends Model
 {
     use HasFactory;
-    
-    protected $table = 'barang';
+    protected $table = 'suply';
     protected $guarded = ['id'];
 
-   /**
-     * Get the user that owns the Barang
+    /**
+     * Get the user that owns the Suply
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function kategori()
+    public function supplier()
     {
-        return $this->belongsTo(Kategori::class, 'kategori_id', 'id');
+        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
 
     /**
-     * The roles that belong to the Barang
+     * The roles that belong to the Suply
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function barangmasuk()
+    public function barangMasuk()
     {
-        return $this->belongsTo(BarangMasuk::class, 'barang_id', 'id');
+        return $this->belongsToMany(BarangMasuk::class, SuplyBarang::class);
     }
 }

@@ -19,21 +19,26 @@
     <div class="bg-white mb-3 p-3 rounded-top">
         @csrf
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6 mb-2">
                 <label for="example-select" class="form-label">Pilih Supplier</label>
-                <select class="form-select select-option" name="supplier" >
+                <select class="form-select " name="supplier" >
                     <option selected disabled> === Pilih Supplier === </option>
                     @foreach ($supplier as $s)
                         <option value="{{ $s->id }}">{{ $s->nama }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6 mb-2">
                 <label for="example-date" class="form-label">Date</label>
-                <input class="form-control" id="example-date" type="date" name="tgl_masuk" required>
+                <input class="form-control" onchange="dateKode(this.value)" id="suply-date" type="date" name="tgl_masuk" required>
             </div>
-            <div class="col-md-2 align-self-center justify-content-center">
-                <button type="button" class="btn btn-success" onclick="tambahBarang()">+Tambah</button>
+            <div class="col-md-6 mb-2">
+                <label for="example-date" class="form-label">Kode Suply</label>
+                <input class="form-control" id="kode-suply" type="text" value="SPY-" name="kode" disabled>
+            </div>
+            <div class="col-md-6 mb-2 ">
+                <label for="" class="form-label">Tambah Barang</label>
+                <button type="button" class="btn btn-success col-12" onclick="tambahBarang()">Tambah Barang yang Masuk</button>
             </div>
         </div>
     </div>
@@ -43,7 +48,7 @@
     <div class="row my-2" id="1">
         <div class="col-md-5">
             <label for="example-select" class="form-label">Pilih Barang</label>
-            <select class="form-select select-option" name="barang[]" >
+            <select class="form-select " name="barang[]" >
                 <option selected disabled> === Pilih Barang === </option>
                 @foreach ($barang as $b)
                     <option value="{{ $b->id }}">{{ $b->nama }}</option>
@@ -70,84 +75,54 @@
 </form>
 @endsection
 @section('js')
+<script>
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('');
+    }
+    function dateKode(val) {
+        let date = formatDate(val)
+        let target = document.getElementById('kode-suply')
+        target.value = `SPY-${date}`
+
+        // console.log(word);
+    }
+</script>
 <script>
     var no = 2
     function tambahBarang() {
         let content = document.getElementById('form-content')
+        content.innerHTML += `
+        <div class="row my-2" id="${no}">
+            <div class="col-md-5">
+                <label for="example-select" class="form-label">Pilih Barang</label>
+                <select class="form-select select-option" name="barang[]" >
+                    <option selected disabled> === Pilih Barang === </option>
+                    @foreach ($barang as $b)
+                        <option value="{{ $b->id }}">{{ $b->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            <div class=" col-md-5">
+                <label class="form-label">Jumlah Barang Masuk</label>
+                <input type="number" placeholder="1" name="quantity[]" min="1" class="form-control" required>
+            </div>
+            <div class="col-md-2 align-self-center">
+                <button class="btn btn-danger" onclick="hapusBarang(${no})" type="button">X Hapus</button>
+            </div>
+        </div>
         
-        // content.append(isi)
-        let row = document.createElement('div')
-        row.classList.add('row','my-2')
-        row.setAttribute('id', no)
-        // membuat col
-        let col1 = document.createElement('div')
-        col1.classList.add('col-md-5')
-        // membuat label
-        let label1 = document.createElement('label')
-        label1.classList.add('form-label')
-        label1.textContent = 'Pilih Barang'
-        // membuat select barang
-        let select = document.createElement('select')
-        select.classList.add('form-select','select-option')
-        select.setAttribute('name','barang[]')
-        // select.select2()
-
-        let value = []
-        let text = []
-        @foreach ($barang as $b)
-            value.push({{ $b->id }})
-            text.push('{{ $b->nama }}')
-        @endforeach
-        let opt = document.createElement('option');
-        opt.setAttribute('selected','');
-        opt.setAttribute('disabled','');
-        opt.innerHTML = ' === Pilih Barang === ';
-        select.appendChild(opt);
-        for (let i = 0; i < value.length; i++) {
-            let opt = document.createElement('option');
-            opt.value = value[i];
-            opt.innerHTML = text[i];
-            select.appendChild(opt);
-        }
-
-        //membuat col2
-        let col2 = document.createElement('div')
-        col2.classList.add('col-md-5')
-        // membuat label2
-        let label2 = document.createElement('label')
-        label2.classList.add('form-label')
-        label2.textContent = 'Jumlah Barang Masuk'
-        // membuat input number
-        let number = document.createElement('input')
-        number.classList.add('form-control')
-        number.setAttribute('type','number')
-        number.setAttribute('placeholder','1')
-        number.setAttribute('name','quantity[]')
-        number.setAttribute('min','1')
-        number.setAttribute('required','')
-
-        // membuat col3
-        let col3 = document.createElement('div')
-        col3.classList.add('col-md-2','align-self-center')
-        // membuat button
-        let btn = document.createElement('button')
-        btn.setAttribute('type','button')
-        btn.setAttribute('onclick',`hapusBarang(${no})`)
-        btn.classList.add('btn','btn-danger')
-        btn.innerHTML = 'X Hapus'
-        
-        // append
-        content.append(row)
-        row.append(col1)
-        row.append(col2)
-        row.append(col3)
-        col1.append(label1)
-        col2.append(label2)
-        col1.append(select)
-        col2.append(number)
-        col3.append(btn)
-
+        `
         no += 1
 
     }
