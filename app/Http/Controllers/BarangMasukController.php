@@ -7,6 +7,7 @@ use App\Models\Supplier;
 use App\Models\Suply;
 use App\Models\Barang;
 use App\Models\SuplyBarang;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BarangMasukController extends Controller
@@ -32,7 +33,10 @@ class BarangMasukController extends Controller
         $barang = Barang::all('id','nama');
         $supplier = Supplier::all('id','nama');
         $suply = Suply::all();
-        return view('admin.barangmasuk.input',compact('barang','supplier','suply'));
+        $day =Carbon::now();
+        $today =  date_format($day,'m/d/Y');
+        // dd($today);
+        return view('admin.barangmasuk.input',compact('barang','supplier','suply','today'));
     }
 
     /**
@@ -50,9 +54,10 @@ class BarangMasukController extends Controller
             'barang' => 'required',
             'quantity' => 'required|min:1'
         ]);
-        $tgl = date('Y-m-d',strtotime($request->tgl_masuk));
+        // dd($request->tgl_masuk);
+        $tgl = $request->tgl_masuk;
         $sup = Suply::where('tanggal_masuk',$tgl);
-        $kode = 'SPY-'. date('Ymd',$tgl).'-'.$sup->count()+1;
+        $kode = 'SPY-'. $tgl.'-'.$sup->count()+1;
         $data = [];
         $no = 0;
 
@@ -65,7 +70,8 @@ class BarangMasukController extends Controller
         foreach ($request->barang as $b) {
             $data[] = BarangMasuk::insertGetId([
                 'stock'=>$request->quantity[$no],
-                'barang_id'=>$b
+                'barang_id'=>$b,
+                'created_at'=> Carbon::now()
             ]);
 
             $barang = Barang::find($b);
@@ -151,7 +157,7 @@ class BarangMasukController extends Controller
             $no += 1;
         }
         $sup = Suply::where('tanggal_masuk',$tgl);
-        $kode = 'SPY-'. date('Ymd',$tgl).'-'.$sup->count()+1;
+        $kode = 'SPY-'. $tgl.'-'.$sup->count()+1;
         Suply::find($id)->update([
             'tanggal_masuk'=>$request->tgl_masuk,
             'supplier_id' =>$request->supplier,

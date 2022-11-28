@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RequestBarang;
+use App\Models\RequestSuplyBarang;
 use App\Models\Barang;
+use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RequestBarangController extends Controller
 {
@@ -15,7 +17,7 @@ class RequestBarangController extends Controller
      */
     public function index()
     {
-        $data = RequestBarang::latest()->get();
+        $data = RequestSuplyBarang::latest()->get();
         return view('admin.requestbarang.index',compact('data'));
     }
 
@@ -28,41 +30,56 @@ class RequestBarangController extends Controller
      */
     public function store(Request $request)
     {
-        RequestBarang::create($request->all());
+        RequestSuplyBarang::create($request->all());
         return redirect()->back()->with('success','Pemesanan berhasil dibuat!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RequestBarang  $requestBarang
+     * @param  \App\Models\RequestSuplyBarang  $requestBarang
      * @return \Illuminate\Http\Response
      */
     public function tolak(Request $request)
     {
-        $req = RequestBarang::find($request->id);
-        $req->update([
-            'status'=>'ditolak',
-            'keterangan'=>$request->keterangan
-        ]);
-        return redirect('/req-barang')->with('success','Request Barang Telah Ditolak');
+        $req = RequestSuplyBarang::find($request->id);
+        DB::beginTransaction();
+        
+        try {
+            $req->update([
+                'status'=>'ditolak',
+                'keterangan'=>$request->keterangan
+            ]);
+            $barangs = BarangKeluar::where('request_suply_barang_id','=',$request->id)->get();
+            // dd($barangs);
+            foreach ($barangs as $i) {
+                $reqStock = $i->stock;
+                $barang = Barang::find($i->barang_id);
+                $tambahStock = $barang->stock + $reqStock;
+                $barang->update(['stock'=>$tambahStock]);
+            }
+            DB::commit();
+            return redirect('/req-barang')->with('success','Request Barang Telah Ditolak');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect('/req-barang')->with('error','Request Barang Gagal Ditolak');
+        }
     }
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RequestBarang  $requestBarang
+     * @param  \App\Models\RequestSuplyBarang  $requestBarang
      * @return \Illuminate\Http\Response
      */
     public function terima(Request $request)
     {
-        $req = RequestBarang::find($request->id);
-        $barang = Barang::find($req->barang_id);
-        if ($req->quantity <= $barang->stock) {
-            $total = $barang->stock - $req->quantity;
-            $barang->update(['stock'=>$total]);
-            $req->update(['status'=>'disetujui']);
-        }else {
-            return redirect()->back()->with('error','Jumlah Stock Kurang!');
+        $req = RequestSuplyBarang::find($request->id);
+        try {
+            $req->update([
+                'status'=>'disetujui'
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error','Request Barang Gagal Di setujui');
         }
         return redirect('/req-barang')->with('success','Request Barang Telah Disetujui');
     }

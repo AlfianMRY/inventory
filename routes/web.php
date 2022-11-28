@@ -12,6 +12,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\RequestBarangController;
+use App\Http\Livewire\ListBarang;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +49,10 @@ Route::middleware('auth','cekstatus')->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('home');
     Route::resource('/profile',ProfileController::class);
     Route::get('/list-barang', [BarangController::class,'listBarang']);
-    Route::post('/list-barang', [BarangController::class,'search']);
-    Route::get('/list-barang/{key}', [BarangController::class,'kategori']);
+    // Route::post('/list-barang', [BarangController::class,'search']);
+    // Route::get('/list-barang/{key}', [BarangController::class,'kategori']);
 });
+Route::get('/livewire',[ListBarang::class,'render']);
 
 // Export Route
 Route::get('/pdf-barang-masuk',[GetPDFController::class,'barangMasuk']);
@@ -63,5 +65,5 @@ Route::get('/excel-barang-masuk',[GetExcelController::class,'barangMasuk']);
 Route::get('/excel-barang',[GetExcelController::class,'barang']);
 Route::get('/excel-request-barang/{key}',[GetExcelController::class,'requestBarang']);
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 

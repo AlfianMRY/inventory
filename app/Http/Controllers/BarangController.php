@@ -167,25 +167,25 @@ class BarangController extends Controller
      * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
-    {
-        $search1 = '%'.$request->search.'%';
-        $barang = Barang::where('nama','LIKE',$search1)->get();
-        $search = ': '.ucwords($request->search);
-        $kategori = Kategori::all();
-        return view('admin.list-barang',compact('barang','search','kategori'));
-    }
+    // public function search(Request $request)
+    // {
+    //     $search1 = '%'.$request->search.'%';
+    //     $barang = Barang::where('nama','LIKE',$search1)->get();
+    //     $search = ': '.ucwords($request->search);
+    //     $kategori = Kategori::all();
+    //     return view('admin.list-barang',compact('barang','search','kategori'));
+    // }
 
-    public function kategori($keys)
-    {
-        if ($keys == 'semua') {
-            $barang = Barang::orderBy('updated_at','asc')->get();
-        }else {
-            $key = Kategori::select('id')->where('nama',$keys)->first();
-            $barang = Barang::orderBy('updated_at','asc')->where('kategori_id',$key->id)->get();
-        }
-        $kategori = Kategori::all();
-        $search = '';
-        return view('admin.list-barang',compact('barang','search','kategori'));
-    }
+    // public function kategori($keys)
+    // {
+    //     if ($keys == 'semua') {
+    //         $barang = Barang::orderBy('updated_at','asc')->get();
+    //     }else {
+    //         $key = Kategori::select('id')->where('nama',$keys)->first();
+    //         $barang = Barang::orderBy('updated_at','asc')->where('kategori_id',$key->id)->get();
+    //     }
+    //     $kategori = Kategori::all();
+    //     $search = '';
+    //     return view('admin.list-barang',compact('barang','search','kategori'));
+    // }
 }

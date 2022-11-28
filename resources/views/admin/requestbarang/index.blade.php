@@ -77,8 +77,21 @@
                     <td class="table-user">
                         <img src="{{ asset('/img/profile/'.$d->user->foto) }}" alt="table-user" class="me-2 rounded-circle" /> {{ $d->user->name }}
                     </td>
-                    <td>{{ $d->barang->nama }}</td>
-                    <td>{{ $d->quantity }}</td>
+                    <td>
+                        <ul>
+                            @foreach ($d->barangkeluar as $i)
+                            <li>{{$i->barang->nama}}</li>
+                            @endforeach    
+                        </ul>    
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach ($d->barangkeluar as $i)
+                            <li>{{$i->stock}}</li>
+                            
+                            @endforeach    
+                        </ul>     
+                    </td>
                     <td>{{ $d->tanggal_request }}</td>
                     <td><span class="badge bg-warning">{{ucwords($d->status)}}</span></td>
                     <th class="text-center table-action">
@@ -97,7 +110,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content modal-filled bg-danger">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="fill-danger-modalLabel">Tolak Pesanan {{ $d->barang->nama }}</h4>
+                                {{-- <h4 class="modal-title" id="fill-danger-modalLabel">Tolak Pesanan {{ $d->barang->nama }}</h4> --}}
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                             </div>
                             <form action="{{ url('/tolak-req') }}" method="post">
@@ -142,8 +155,21 @@
                 @foreach ($data->where('status','disetujui') as $d)
                 <tr>
                     <td class="table-user"><img src="{{ asset('/img/profile/'.$d->user->foto) }}" alt="table-user" class="me-2 rounded-circle" />{{ $d->user->name }}</td>
-                    <td>{{ $d->barang->nama }}</td>
-                    <td>{{ $d->quantity }}</td>
+                    <td>
+                        <ul>
+                            @foreach ($d->barangkeluar as $i)
+                            <li>{{$i->barang->nama}}</li>
+                            @endforeach    
+                        </ul>    
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach ($d->barangkeluar as $i)
+                            <li>{{$i->stock}}</li>
+                            
+                            @endforeach    
+                        </ul>     
+                    </td>
                     <td>{{ $d->tanggal_request }}</td>
                     <td><span class="badge bg-success">{{ucwords($d->status)}}</span></td>
                 </tr>
@@ -172,8 +198,22 @@
                 @foreach ($data->where('status','ditolak') as $d)
                 <tr>
                     <td class="table-user"><img src="{{ asset('/img/profile/'.$d->user->foto) }}" alt="table-user" class="me-2 rounded-circle" />{{ $d->user->name }}</td>
-                    <td>{{ $d->barang->nama }}</td>
-                    <td>{{ $d->quantity }}</td>
+                    
+                    <td>
+                        <ul>
+                            @foreach ($d->barangkeluar as $i)
+                            <li>{{$i->barang->nama}}</li>
+                            @endforeach    
+                        </ul>    
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach ($d->barangkeluar as $i)
+                            <li>{{$i->stock}}</li>
+                            
+                            @endforeach    
+                        </ul>     
+                    </td>
                     <td>{{ $d->tanggal_request }}</td>
                     <td><span class="badge bg-danger">{{ucwords($d->status)}}</span></td>
                 </tr>

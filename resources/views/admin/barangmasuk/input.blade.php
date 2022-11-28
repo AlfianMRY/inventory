@@ -19,7 +19,7 @@
     <div class="bg-white mb-3 p-3 rounded-top">
         @csrf
         <div class="row">
-            <div class="col-md-6 mb-2">
+            <div class="col-md-4 mb-2">
                 <label for="example-select" class="form-label">Pilih Supplier</label>
                 <select class="form-select " name="supplier" >
                     <option selected disabled> === Pilih Supplier === </option>
@@ -28,23 +28,22 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-6 mb-2">
+            <div class="col-md-4 mb-2">
                 <label for="example-date" class="form-label">Date</label>
-                <input class="form-control" onchange="dateKode(this.value)" id="suply-date" type="date" name="tgl_masuk" required>
+                <input class="form-control" value="{{ date('Y-m-d') }}"  onchange="dateKode(this.value)" id="suply-date" type="date" name="tgl_masuk" required>
             </div>
-            <div class="col-md-6 mb-2">
+            <div class="col-md-4 mb-2">
                 <label for="example-date" class="form-label">Kode Suply</label>
                 <input class="form-control" id="kode-suply" type="text" value="SPY-" name="kode" disabled>
             </div>
-            <div class="col-md-6 mb-2 ">
-                <label for="" class="form-label">Tambah Barang</label>
-                <button type="button" class="btn btn-success col-12" onclick="tambahBarang()">Tambah Barang yang Masuk</button>
-            </div>
+            
         </div>
     </div>
 @endsection
 @section('content')
+
 <div id="form-content" class=" rounded-bottom">
+    
     <div class="row my-2" id="1">
         <div class="col-md-5">
             <label for="example-select" class="form-label">Pilih Barang</label>
@@ -52,7 +51,7 @@
                 <option selected disabled> === Pilih Barang === </option>
                 @foreach ($barang as $b)
                     <option value="{{ $b->id }}">{{ $b->nama }}</option>
-                @endforeach
+                    @endforeach
             </select>
         </div>
         
@@ -63,6 +62,12 @@
         <div class="col-md-2 align-self-center">
             <button class="btn btn-danger" onclick="hapusBarang(1)" type="button">X Hapus</button>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mb-2 mt-2">
+        {{-- <label for="" class="form-label">Tambah Barang</label> --}}
+        <button type="button" class="btn btn-success col-12" onclick="tambahBarang()">Tambah Barang yang Masuk</button>
     </div>
 </div>
 @endsection
@@ -134,6 +139,8 @@
 <script>
     $(document).ready(function() {
         $('.select-option').select2();
+        $('#suply-date').val(new Date().toDateInputValue());
+
     });
 </script>
 @endsection

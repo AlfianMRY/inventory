@@ -13,7 +13,7 @@
         <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/app-modern.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
         <link href="{{ asset('assets/css/app-modern-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
-
+        @livewireStyles
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
         @yield('css')
@@ -77,28 +77,30 @@
         {{-- <div class="rightbar-overlay"></div> --}}
         <!-- /End-bar -->
         @include('sweetalert::alert')
-
+        @livewireScripts
 
         <!-- bundle -->
         <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
         @yield('js')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="text/javascript">
         
             $('.show_confirm').click(function(event) {
                 var form =  $(this).closest("form");
                 var name = $(this).data("name");
                 event.preventDefault();
-                swal({
+                Swal.fire({
                     title: `Are you sure you want to delete this record?`,
                     text: "If you delete this, it will be gone forever.",
                     icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
                 })
-                .then((willDelete) => {
-                    if (willDelete) {
+                .then((result) => {
+                    if (result.isConfirmed) {
                     form.submit();
                     }
                 });

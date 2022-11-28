@@ -45,8 +45,8 @@ class User extends Authenticatable
      *
      * @return \Illuminate\RequestBarang\Eloquent\Relations\HasMany
      */
-    public function request()
+    public function requestsuplybarang()
     {
-        return $this->hasMany(RequestBarang::class, 'user_id', 'id');
+        return $this->hasMany(RequestSuplyBarang::class, 'user_id', 'id');
     }
 }

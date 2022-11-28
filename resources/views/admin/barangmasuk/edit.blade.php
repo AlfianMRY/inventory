@@ -76,11 +76,11 @@
 @section('js')
 @php
     use Carbon\carbon;
-    if (isset($_COOKIE)) {
-        $date = $_COOKIE['tgl'];
-    }else{
+    // if (isset($_COOKIE)) {
+    //     $date = $_COOKIE['tgl'];
+    // }else{
         $date = 0;
-    }
+    // }
     // dd($date);
 @endphp
 <script>

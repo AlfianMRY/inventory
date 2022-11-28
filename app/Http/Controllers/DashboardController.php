@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Barang;
 use App\Models\BarangMasuk;
-use App\Models\RequestBarang;
+use App\Models\RequestSuplyBarang;
 use App\Models\Supplier;
 use App\Models\User;
 use Carbon\Carbon;
@@ -27,14 +27,14 @@ class DashboardController extends Controller
         {
             $barangMasuk = BarangMasuk::whereMonth('created_at','=',$date->month)
                 ->get('stock')->sum('stock');
-            $barangKeluar = RequestBarang::whereMonth('tanggal_request','=',$date->month)
-                ->where('status','=','disetujui')->get('quantity')->sum('quantity');
+            $barangKeluar = RequestSuplyBarang::whereMonth('request_suply_barang.tanggal_request','=',$date->month)
+                ->where('request_suply_barang.status','=','disetujui')->join('barang_keluar','barang_keluar.request_suply_barang_id','=','request_suply_barang.id')->get('barang_keluar.stock')->sum('quantity');
             $data[] = $date->monthName;
             $bm[] = $barangMasuk;
             $rbs[] = $barangKeluar;
             $sisa[] = $barangMasuk - $barangKeluar;
-            $rbt[] = RequestBarang::whereMonth('tanggal_request','=',$date->month)
-                ->where('status','=','ditolak')->get('quantity')->sum('quantity');
+            $rbt[] = RequestSuplyBarang::whereMonth('request_suply_barang.tanggal_request','=',$date->month)
+                ->where('request_suply_barang.status','=','ditolak')->join('barang_keluar','barang_keluar.request_suply_barang_id','=','request_suply_barang.id')->get('barang_keluar.stock')->sum('quantity');
         }
         return compact('bm','data','rbs','rbt','sisa');
     }

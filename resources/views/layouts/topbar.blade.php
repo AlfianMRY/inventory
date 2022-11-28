@@ -41,7 +41,7 @@
                             </div>
                             <p class="notify-details">{{ $i->user->name }}</p>
                             <p class="text-muted mb-0 user-msg">
-                                <small><strong>{{ $i->barang->nama }}</strong> ~ {{ $i->quantity }} buah</small>
+                                <small><strong>{{ $i->status }}</strong> ~ {{ $i->barangkeluar->count() }} Items</small>
                             </p>
                         </a>
                         @endforeach
