@@ -37,7 +37,7 @@
                                         <p class="mb-0 font-13 text-white-50">Status Akun</p>
                                     </li>
                                     <li class="list-inline-item">
-                                        <h5 class="mb-1">{{ $user->request()->count() }}x</h5>
+                                        <h5 class="mb-1">{{ $user->requestsuplybarang()->count() }}x</h5>
                                         <p class="mb-0 font-13 text-white-50">Melakukan Pemesanan</p>
                                     </li>
                                 </ul>

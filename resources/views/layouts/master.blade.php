@@ -22,7 +22,7 @@
     </head>
 
     <body class="loading" style="background-color: rgb(184, 210, 255)" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'>
-
+@include('sweetalert::alert')
         <!-- Topbar Start -->
         @include('layouts.topbar')
         <!-- end Topbar -->
